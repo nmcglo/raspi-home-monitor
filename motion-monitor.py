@@ -26,7 +26,7 @@ if __name__ == '__main__':
     while True:
         if pir.motion_detected:
             theTime = datetime.datetime.now().time()
-            message = "Motion detected! " + theTime
+            message = "Motion detected! " + str(theTime)
             print(message)
             send(message)
             sleep(10) #sleep for 30 seconds to avoid repeated alarms
