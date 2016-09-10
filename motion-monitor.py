@@ -1,3 +1,4 @@
+import os
 from gpiozero import MotionSensor
 from time import sleep
 import datetime
