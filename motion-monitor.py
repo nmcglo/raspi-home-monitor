@@ -14,9 +14,9 @@ fromNum = os.environ['TWILIONUMBER']
 
 def send(txtbody):
     client.messages.create(
-    to = toNum,
-    from = fromNum,
-    body = txtbody
+    to=toNum,
+    from_=fromNum,
+    body=txtbody
     )
 
 if __name__ == '__main__':
