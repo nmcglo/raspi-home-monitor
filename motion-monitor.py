@@ -3,6 +3,7 @@ from gpiozero import MotionSensor
 from time import sleep
 import datetime
 from twilio.rest import TwilioRestClient
+import subprocess
 
 ACCOUNT_SID = os.environ['TWILIOSID']
 AUTH_TOKEN = os.environ['TWILIOTOKEN']
@@ -29,4 +30,5 @@ if __name__ == '__main__':
             message = "Motion detected! " + str(theTime)
             print(message)
             send(message)
+            subprocess.call(["ssh","neil@remotehost", "python3 /home/neil/raspi-home-monitor/monitor-exec.py -v"])
             sleep(10) #sleep for 30 seconds to avoid repeated alarms

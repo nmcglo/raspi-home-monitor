@@ -4,7 +4,7 @@ import dropbox
 import picamera
 from time import sleep
 
-outdir = "output/"
+outdir = "/home/neil/raspi-home-monitor/output/"
 
 PHOTOFLAG = True
 VIDEOFLAG = False
