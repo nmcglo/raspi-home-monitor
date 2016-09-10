@@ -2,6 +2,7 @@ import sys
 import os
 import dropbox
 import picamera
+from time import sleep
 
 outdir = "output/"
 
@@ -42,15 +43,15 @@ def photoCapture(filename):
     camera.start_preview()
     # Camera warm-up time
     sleep(3)
-    camera.capture(filename)
+    camera.capture(outdir + filename)
     f = open(outdir + filename, 'rb')
 
     return f
 
 def vidCapture(filename):
     camera = picamera.PiCamera()
-    camera.resolution = (1296, 730)
-    camera.start_recording(filename)
+    camera.resolution = (1296, 972)
+    camera.start_recording(outdir + filename)
     camera.wait_recording(vidLength)
     camera.stop_recording()
     f = open(outdir + filename, 'rb')
@@ -126,7 +127,7 @@ if __name__ == '__main__':
 
     elif VIDEOFLAG is True:
         baseName = "vid"
-        ext = ".vid" #TODO figure out the video extension
+        ext = ".h264" #TODO figure out the video extension
         filename = getValidFilename(baseName,ext)
         f = vidCapture(filename)
 
