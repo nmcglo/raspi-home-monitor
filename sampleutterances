@@ -1,0 +1,8 @@
+SetStatus set the system to {Status}
+SetStatus set the sensor to {Status}
+SetStatus set the motion sensor to {Status}
+SetStatus set the alarm to {Status}
+Activate activate the system
+Deactivate deactivate the system
+Activate turn on the system
+Deactivate turn off the system

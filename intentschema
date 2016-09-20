@@ -1,0 +1,19 @@
+{
+  "intents": [
+    {
+      "intent": "SetStatus",
+      "slots": [
+        {
+          "name": "Status",
+          "type": "ONOROFF"
+        }
+      ]
+    },
+    {
+      "intent": "Activate"
+    },
+    {
+      "intent": "Deactivate"
+    }
+  ]
+}
