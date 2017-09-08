@@ -20,20 +20,6 @@ if len(sys.argv) > 1: #then there are command line arguments
         PHOTOFLAG = False
         TESTFLAG = True
 
-#Authorization flow
-def authorize():
-    flow = dropbox.client.DropboxOAuth2FlowNoRedirect(KEY, SECRET)
-    # Have the user sign in and authorize this token
-    authorize_url = flow.start()
-    print ('1. Go to: ' + authorize_url)
-    print ('2. Click "Allow" (you might have to log in first)')
-    print ('3. Copy the authorization code.')
-    code = input("Enter the authorization code here: ").strip()
-    access_token, user_id = flow.finish(code)
-
-    return access_token,user_id
-
-
 
 #CAPTURING
 
@@ -68,9 +54,16 @@ def screenCapture(filename):
 
 #DROPBOX UTILITIES
 
+
 #Uploads a file to the dropbox client
 def upload(client, thefile, filename):
-    response = client.put_file(filename, thefile)
+    with open(filename, 'rb') as f:
+        data = f.read()
+
+    response = client.files_upload(data, filename)
+
+    # response = client.files_upload()
+    # response = client.put_file(filename, thefile)
     print("uploaded:", response)
 
 #This is to ensure that you don't overwrite a file that has been previously uploaded
@@ -107,13 +100,10 @@ if __name__ == '__main__':
     KEY = os.environ['DBKEY']
     SECRET = os.environ['DBSECRET']
 
-    try:
-        TOKEN = os.environ['DBTOKEN']
-    except:
-        print("There was no Dropbox Token Environment Variable. Proceeding to authorization step")
-        TOKEN, userID = authorize()
+    TOKEN = os.environ['DBTOKEN']
 
-    client = dropbox.client.DropboxClient(TOKEN)
+
+    client = dropbox.Dropbox(TOKEN)
 
     print("Client Connected")
 
