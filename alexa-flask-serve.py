@@ -127,12 +127,8 @@ def send(txtbody):
 
 def monitorWorker(pir):
     global SYSTEM_STATUS
-    firstRun = True
     while True:
         if SYSTEM_STATUS:
-            if not firstRun:
-                sleep(10) #sleep for 30 seconds to avoid repeated alarms
-            firstRun = False
             if pir.motion_detected:
                 theTime = datetime.datetime.now().time()
                 message = "Motion detected! " + str(theTime)
@@ -173,6 +169,8 @@ def monitorWorker(pir):
 
                 print("\n-------------\n")
 
+                sleep(10) #sleep for 30 seconds to avoid repeated alarms
+
 
 
 @ask.intent('SetStatus', mapping={'status': 'status'})
@@ -209,7 +207,7 @@ def deactivate():
     if (SYSTEM_STATUS == False):
         return statement('Monitor is already off')
     else:
-        SYSTEM_STATUS = True
+        SYSTEM_STATUS = False
         return statement('Turning System off')
 
 
